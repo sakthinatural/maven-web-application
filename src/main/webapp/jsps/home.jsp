@@ -13,7 +13,7 @@
 <h1 align="center"> Mithun Software Solutions- Very Good Training center for DevOps with AWS in Maratha Halli Bangalore India and also for Job Assitance Job Support also...Teaching Real Time scnerios</h1>
 
 <br><br>
-	<h1><h3> Server Side IP Address </h3><br>
+	<h1><h3> Server Side IP Address </h3><br>  
 
 <% 
 String ip = "";
