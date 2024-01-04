@@ -4,7 +4,7 @@
 pipeline {
     agent any
     tools { 
-        maven 'maven3.3.6' 
+        maven 'maven3.9.5' 
     }
 
 
