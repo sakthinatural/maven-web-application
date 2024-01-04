@@ -19,27 +19,14 @@ pipeline {
 
     }
 
-    stage(" Sonar Analysis") {
-      environment {
-        SONAR_URL = "http://18.234.169.191:9000"
-      }
-
-      steps {
-        withCredentials([string(credentialsId: '09b7aaa6-4b6c-4899-8455-6977ee1a5a93', variable: 'SONAR_AUTH_TOKEN']) {
-          sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-        }
-      }
-
-    }
-
-
+    
     stage('Static Code Analysis') {
       environment {
         SONAR_URL = "http://18.234.169.191:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'sonartoken', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+          sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
       }
     }
