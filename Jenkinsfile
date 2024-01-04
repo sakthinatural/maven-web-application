@@ -2,12 +2,7 @@
 
 
 pipeline {
-    agent {
-        docker {
-        image 'abhishekf5/maven-abhishek-docker-agent:v1'
-        args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
-        }
-	 }
+    agent any
 
 
     stages {
@@ -16,10 +11,11 @@ pipeline {
                 git 'https://github.com/sakthinatural/maven-web-application.git'
             }
         }
-		stage('build') {
-            steps {
-               sh "${maven}/bin/mvn clean package"
-            }
-        }
+		stage(" Maven Clean Package"){
+            def mavenHome =  tool name: "Maven-3.5.6", type: "maven"
+            def mavenCMD = "${mavenHome}/bin/mvn"
+            sh "${mavenCMD} clean package"
+            
+            } 
     }
 }
