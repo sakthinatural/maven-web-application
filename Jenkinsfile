@@ -5,6 +5,11 @@ pipeline {
   }
 
   stages {
+    stage('sharedlibrary'){
+      steps{
+          helloWorld()
+      }
+    }
     stage('checkout code') {
       steps {
         git 'https://github.com/sakthinatural/maven-web-application.git'
