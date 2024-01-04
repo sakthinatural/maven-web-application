@@ -24,22 +24,24 @@ pipeline {
       environment {
         SONAR_URL = "http://18.234.169.191:9000"
       }
+      
       steps {
-        withCredentials([string(credentialsId: 'sonartoken', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-        }
-      }
+                withSonarQubeEnv('sonartoken'){
+                    // If you are using Windows then you should use "bat" step
+                    // Since unit testing is out of the scope we skip them
+                    sh "mvn sonar:sonar"
+                }
+            }
     }
 
 
-    stage("Quality Gate") {
+     stage ("Quality Gate ") {
             steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
-          }
-
+        }
 
 
   
