@@ -3,6 +3,10 @@
 
 pipeline {
     agent any
+    tools { 
+        maven 'Maven 3.3.9' 
+        jdk 'jdk8' 
+    }
 
 
     stages {
@@ -11,10 +15,10 @@ pipeline {
                 git 'https://github.com/sakthinatural/maven-web-application.git'
             }
         }
+
+        
 		stage(" Maven Clean Package"){
-            def mavenHome =  tool name: "Maven-3.5.6", type: "maven"
-            def mavenCMD = "${mavenHome}/bin/mvn"
-            sh "${mavenCMD} clean package"
+            sh "mvn clean package"
             
             } 
     }
